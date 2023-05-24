@@ -1,0 +1,36 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'main/css/reset.css'%}">
+    <link rel="stylesheet" href="{%static 'main/fonts/icomoon/icomoon.css'%}">
+    <link rel="stylesheet" href="{%static 'main/css/main.css'%}">
+    <link rel="stylesheet" href="{%static 'main/css/navbar.css'%}">
+    {% block head %}
+    {% endblock head %}
+    <title>{% block title %}{% endblock title %}</title> 
+</head>
+<body>
+    <header class="container">
+        {% block header %}{% endblock header %}
+    </header>
+    <main class="container">
+        {% block content %}{% endblock content %}
+    </main>
+    <footer class="container">
+        <section class="footer"> 
+            <ul class="menu">
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">О нас</a></li>
+                <li><a href="#">Сервисы</a></li>
+                <li><a href="#">Команда</a></li>
+                <li><a href="#">Контакты</a></li>
+            </ul>
+            <p>©2021 Online Practicum | All Rights Reserved</p>
+        </section>
+    </footer>
+</body>
+</html>

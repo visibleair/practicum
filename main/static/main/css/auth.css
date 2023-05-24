@@ -1,0 +1,136 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Установка высоты body на 100% высоты экрана */
+    padding-bottom: 70px;
+  }
+
+.section_bg{
+    margin: auto;
+    display: flex;
+    justify-content: center; /* горизонтальное выравнивание по центру */
+    align-items: center;
+    flex-direction: column;
+
+    
+}
+.auth__form{
+    margin-top: 25px;
+    padding: 10px;
+    /*background-color: #000;*/
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+}
+
+.auth__title{
+    font-weight: 700;
+    font-size: 40px;
+    margin-bottom: 25px;
+    text-align: center;
+    width: 100%;
+    color: #000;
+}
+
+
+.auth__button{
+    width: 100%;
+    height: 75px;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 36px;
+    text-align: center;
+    border-radius: 0 0 15px 15px;
+    background: linear-gradient(90deg, #FE6D33 0%, #6C212C 100%);
+}
+
+.auth__input{
+    padding: 0 18px 0 18px;
+    height: 66px;
+    width: 419px;
+    border: 1px solid rgba(0, 0, 0, 0.17);
+    outline: none;
+    background: #FFF;
+    color: #000;
+}
+
+input:-internal-autofill-selected {
+    background-color: #FFF !important;
+    color: fieldtext !important;
+}
+
+
+.auth__input-top{
+    border-radius: 15px 15px 0px 0px;
+}
+
+.auth__input-bottom{
+    border-radius: 0px 0px 0px 0px;
+}
+
+
+.register_link{
+    font-size: 20px;
+    color: #000;
+    text-align: center;
+}
+
+.register_link a{
+    color: #6C212C;
+    text-decoration: underline;
+}
+
+.register_link a:hover{
+    color: #FE6D33;
+    text-decoration: underline;
+}
+
+
+.section_errors{
+    border-radius: 25px;
+    padding: 26px;
+    font-size: 15px;
+}
+
+.errorlist li{
+    text-align: justify;
+    display: flex;
+}
+
+.section_errors li:child::before {
+    content: " - ";
+}
+
+
+.error-box {
+    margin-top: 25px;
+    font-size: 16px;
+    width: 419px;
+    text-align: justify;
+    background: linear-gradient(90deg, #FE6D33 0%, #6C212C 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 25px;
+}
+
+  
+  .error-box strong {
+    font-weight: bold;
+  }
+  
+  .error-box p {
+    margin: 0;
+  }
+
+
+  select {
+    padding: 0 13.5px;
+    height: 66px;
+    width: 419px;
+    border: 1px solid rgba(0, 0, 0, 0.17);
+    outline: none;
+    background: #FFF;
+    color: #000;
+  }

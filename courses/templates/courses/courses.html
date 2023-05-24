@@ -1,0 +1,74 @@
+{% extends 'main/layout.html' %}
+{%load static %}
+
+{% block head %}
+
+{% endblock head %}
+
+{% block title %}
+    Курсы
+{% endblock title %}
+
+{% block header %}
+    {% include 'main/navbar.html' %}
+{% endblock header %}
+
+{% block content %}
+
+<div class="tabs">
+  <section class="tab_btn">
+    <label for="tab1">Все курсы</label>
+  
+    <label for="tab2">Мои курсы</label>
+    
+  </section>
+
+  <input type="radio" id="tab1" name="tabs" checked>
+  <input type="radio" id="tab2" name="tabs">
+
+  <div class="tab-content">
+    <div class="grid-container" id="panel1">
+      {% for course in courses %}
+      <a href="{%url 'course_detail' course.id%}" class="course-card">
+        <img src="{% static 'main/img/course_1.png' %}" alt="Course Image">
+        <div class="course-details">
+          <h2 class="course-title">{{ course.name }}</h2>
+          <p class="course-description">{{ course.description | truncatechars_html:100 }}</p>
+          <p class="course-teacher">Преподаватель: {{course.teacher.get_full_name}}</p>
+          <div class="course-rating">
+            <span class="rating-level">Cложность:&nbsp;</span>
+            <span class="rating-stars">
+            {% for _ in ''|ljust:course.level|slice:":" %}
+            ★
+            {% endfor %}
+            </span>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+    </div>
+    <div class="grid-container" id="panel2">
+    {% for course in enrolled_courses %}
+    <a href="{%url 'course_detail' course.id%}" class="course-card">
+      <img src="{% static 'main/img/course_1.png' %}" alt="Course Image">
+      <div class="course-details">
+        <h2 class="course-title">{{ course.name }}</h2>
+        <p class="course-description">{{ course.description | truncatechars_html:100 }}</p>
+        <p class="course-teacher">Преподаватель: {{course.teacher.get_full_name}}</p>
+        <div class="course-rating">
+          <span class="rating-level">Cложность:&nbsp;</span>
+          <span class="rating-stars">
+          {% for _ in ''|ljust:course.level|slice:":" %}
+          ★
+          {% endfor %}
+          </span>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+    </div>
+  </div>
+</div>
+
+   
+{% endblock content %}

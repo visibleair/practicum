@@ -1,0 +1,49 @@
+{% extends 'main/layout.html' %}
+{%load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{%static 'main/css/auth.css'%}">
+{% endblock head %}
+
+{% block title %}Регистрация{% endblock title %}
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<section class="section_bg">
+    <span class="auth__title">Регистрация</span>
+    <span class="register_link">Есть аккаунт? <a href="{% url 'profile' %}">Нажмите, чтобы войти</a></span>
+    {% if form.errors %}
+    <div class="error-box">
+        {% for field in form %}
+        {% for error in field.errors %}
+            <p><strong>{{ field.label }}</strong>: {{ error }}</p>
+        {% endfor %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <form class="auth__form" method="post">
+        {% csrf_token %} 
+        <input value="{{ form.username.value|default:'' }}" class="auth__input auth__input-top" type="text" name="username" placeholder="Никнейм" required>
+        <input value="{{ form.email.value|default:'' }}" class="auth__input" type="text" name="email" placeholder="Email" required>
+        <select value="{{ form.gender.value|default:'' }}" name="gender">
+            <option value="M">Мужчина</option>
+            <option value="F">Женщина</option>
+          </select>
+        <input value="{{ form.birth_date.value|default:'' }}" class="auth__input" type="date" name="birth_date" id="birth_date" placeholder="Дата рождения" required>
+        <input value="{{ form.password1.value|default:'' }}" class="auth__input" type="password" name="password1" placeholder="Пароль" required>
+        <input value="{{ form.password2.value|default:'' }}" class="auth__input" type="password" name="password2" placeholder="Подтверждение пароля" required>
+        <button class="auth__button"  id="loginBtn">Войти</button>
+    </form>
+</section>
+
+<script>
+    let maxDate = new Date();
+    maxDate.setFullYear(maxDate.getFullYear() - 14);
+    let minDate = new Date();
+    minDate.setFullYear(minDate.getFullYear() - 90);
+    document.getElementById('birth_date').setAttribute('max', maxDate.toISOString().slice(0, 10));
+    document.getElementById('birth_date').setAttribute('min', minDate.toISOString().slice(0, 10));
+</script>
+
+{% endblock content %}

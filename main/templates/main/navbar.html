@@ -1,0 +1,60 @@
+<nav class="nav">
+    <input type="checkbox" id="toggle">
+    <input type="checkbox" id="toggle1">
+    <section class="nav_bar">
+        <section class="button_burger">
+            <label class="navbar-toggler" for="toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </label>
+        </section>
+       
+        <form class="search__form">
+            <input class="input__search" type="text" placeholder="Поиск по курсам">
+            <span class="icon-search"></span>
+        </form>
+        <section class="user__form">
+            {% if request.user.is_authenticated %}
+                <p>{{user.username}}</p>
+                <label class=" navbar-toggler" for="toggle1"><img class="image__avatar" src="{{user.avatar}}" alt=""></label>
+            {% else %}
+            <section class="button_nav"> <a href="{%url 'profile'%}">Войти</a></section>
+            {% endif %}
+        </section>
+    </section>
+
+    <section class="parent_menu">
+        <section class="menu_bg">
+            <ul>
+                <li><a href="{%url 'home'%}">Главная</a></li>
+                <li><a href="{%url 'courses'%}">Мои курсы</a></li>
+                <li><a href="{%url 'profile'%}">Профиль</a></li>
+            </ul>
+        </section>
+    
+        {% if request.user.is_authenticated %}
+        <section class="parent_menu">
+            <section class="profile">
+                <section class="profile_info">
+                    <section class="profile_name">{{user.first_name}} {{user.last_name}}</section>
+                    <section class="profile_nickname">@{{user.username}}</section>
+                    <section class="profile_label">C 14 мая 2017</section>
+                    <section>
+                        <a href="{% url 'profile_edit' %}"> <span class="icon-pencil"></span></a>
+                        <a href='{% url 'logout' %}?next=/profile'><span class="icon-exit"></span></a>
+                    </section>
+                </section>
+                <img class="image__avatar_profile" src="{{user.avatar}}" alt="">
+            </section>
+        </section>
+        {% endif %}
+    </section>
+</nav>
+
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+{% endblock head %}
+
+{% block title %}
+    Курсы
+{% endblock title %}
+
+{% block header %}
+    {% include 'main/navbar.html' %}
+    <link rel="stylesheet" href="{%static 'main/css/course_material.css'%}">
+{% endblock header %}
+
+{% block content %}
+  {% if request.user.is_authenticated %}
+    <section class="block_content">
+    {% for material in materials %}
+      {{material.content|safe}}
+      {% empty %}
+      <li>Нет материалов для этого курса.</li>
+      {% endfor %}
+    {%else%}
+    </section>
+  {% endif %}
+    
+{% endblock content %}

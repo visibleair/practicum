@@ -1,0 +1,36 @@
+.block_content{
+    max-width: 860px;
+    margin: auto;
+}
+
+
+h1{
+    font-weight: bold;
+    font-size: 45px;
+    margin-top: 48px;
+}
+
+h2{
+    margin-top: 40px;
+    margin-bottom: 12px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+h3{
+    font-weight: bold;
+}
+
+p{
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-size: 20px;
+    font-weight: 450;
+}
+
+.block_content img{
+    margin-top: 20px;
+    border-radius: 25px;
+    width: 100%;
+    align-items: center;
+}

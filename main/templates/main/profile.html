@@ -1,0 +1,19 @@
+{% extends 'main/layout.html' %}
+
+{% block head %}
+{% endblock head %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block header %}
+    {% include 'main/navbar.html' %}
+{% endblock header %}
+
+{% block content %}
+    <p>{{user.username}}</p>
+    <p>{{user.first_name}}</p>
+    <p>{{user.last_name}}</p>
+    <p>{{user.username}}</p>
+{% endblock content %}

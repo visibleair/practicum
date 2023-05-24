@@ -1,0 +1,33 @@
+{% extends 'main/layout.html' %}
+{%load static %}
+{% block title %}Авторизация{% endblock title %}
+{% block head %}
+  <link rel="stylesheet" href="{%static 'main/css/auth.css'%}">
+{% endblock head %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<section class="section_bg">
+  <span class="auth__title">Вход</span>
+  <span class="register_link">Чтобы зарегистрироваться, <a href="{% url 'register' %}">нажмите</a></span>
+  {% if form.errors %}
+  <div class="error-box">
+    <strong> {{ form.errors }}</strong>
+  </div>
+  {% endif %}
+  <form class="auth__form" method="post">
+      {% csrf_token %} 
+      <input value="{{ form.username.value|default:'' }}" class="auth__input auth__input-top" type="text" name="username" placeholder="Никнейм" required>
+      <input value="{{ form.password.value|default:'' }}" class="auth__input" type="password" name="password" placeholder="Пароль" required>
+      <button class="auth__button"  id="loginBtn">Войти</button>
+  </form>
+</section>
+{% endblock content %}
+
+
+
+
+
+

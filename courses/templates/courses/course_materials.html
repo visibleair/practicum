@@ -15,11 +15,15 @@
 {% block content %}
   {% if request.user.is_authenticated %}
     <section class="block_content">
-    {% for material in materials %}
+    {% comment %}{% for material in materials %}
       {{material.content|safe}}
       {% empty %}
       <li>Нет материалов для этого курса.</li>
-      {% endfor %}
+      {% endfor %}{% endcomment %}
+      <h1>{{ subtopic.title }}</h1>
+      <p>{% for object in content %}
+          {{object.material_number.content|safe}}
+        {% endfor %}</p>
     {%else%}
     </section>
   {% endif %}

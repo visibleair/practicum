@@ -45,4 +45,24 @@ def enroll_course(request, course_id):
         course = get_object_or_404(Course, pk=course_id)
         CourseEnrollment.objects.get_or_create(user=request.user, course=course)
         return redirect('course_detail', pk=course_id)
+from django.shortcuts import render, get_object_or_404
+from .models import Subtopics, PriorityContent
+
+
+
+def subtopic_detail_view(request, course_id, subtopic_id):
     
+    subtopic = get_object_or_404(Subtopics, pk=subtopic_id, course=course_id)
+    content = PriorityContent.objects.filter(subtopic_number=subtopic_id)
+    cleaned_contents = []
+    
+    for material in content:
+        cleaned_content = bleach.clean(material.material_number.content, tags=['p', 'h3', 'strong','h1', 'h2', 'img'], attributes={'img': ['src']})
+        material.content = cleaned_content
+        cleaned_contents.append(material)
+
+    context = {
+        'subtopic': subtopic,
+        'content': cleaned_contents
+    }
+    return render(request, 'courses/course_materials.html', context)

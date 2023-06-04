@@ -51,6 +51,7 @@ class CourseMaterial(models.Model):
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from tests.models import Test
 
 
 
@@ -94,6 +95,7 @@ class PriorityContent(models.Model):
     subtopic_number = models.ForeignKey(Subtopics, on_delete=models.CASCADE)
     material_number = models.ForeignKey(CourseMaterial, on_delete=models.CASCADE, null=True, blank=True)
     task_number = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, blank=True)
+    test_number = models.ForeignKey(Test, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f'Number: {self.number}, Subtopic Number: {self.subtopic_number}'
@@ -102,3 +104,9 @@ class PriorityContent(models.Model):
         verbose_name = 'Очередность контента'
         verbose_name_plural = 'Очередность контента'
         ordering = ['number']
+        
+        
+class CourseProgress(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    suptopic = models.ForeignKey(Subtopics, on_delete=models.CASCADE)

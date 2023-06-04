@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Course, CourseMaterial, CourseEnrollment
+from .models import Course, CourseMaterial, CourseEnrollment, Subtopics, PriorityContent, CourseProgress
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
 import bleach
+from django.shortcuts import render, get_object_or_404
 
 @login_required
 def courses(request):
@@ -11,20 +12,23 @@ def courses(request):
     return render(request, 'courses/courses.html', {'enrolled_courses': enrolled_courses, 'courses': all_courses})
 
 
-class CourseDetailView(DetailView):
-    model = Course
-    template_name = 'courses/detail_view.html'
-    context_object_name = 'course'
+def courseDetailView(request, course_id):
+    course = get_object_or_404(Course, pk=course_id)
+    user = request.user
+    subtopic = get_object_or_404(CourseProgress, course_id=1, user_id=user.id).suptopic
+   
+     
+    context = {
+        'course': course,
+        'subtopic': subtopic,
+    }
+    if CourseEnrollment.objects.filter(user=user, course=course).exists():
+        context['enrolled'] = True
+    else:
+        context['enrolled'] = False
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user = self.request.user
-        course = self.get_object()
-        if CourseEnrollment.objects.filter(user=user, course=course).exists():
-            context['enrolled'] = True
-        else:
-            context['enrolled'] = False
-        return context
+    
+    return render(request, 'courses/detail_view.html', context)
     
     
 def course_materials(request, course_id):
@@ -45,24 +49,37 @@ def enroll_course(request, course_id):
         course = get_object_or_404(Course, pk=course_id)
         CourseEnrollment.objects.get_or_create(user=request.user, course=course)
         return redirect('course_detail', pk=course_id)
-from django.shortcuts import render, get_object_or_404
-from .models import Subtopics, PriorityContent
-
 
 
 def subtopic_detail_view(request, course_id, subtopic_id):
-    
     subtopic = get_object_or_404(Subtopics, pk=subtopic_id, course=course_id)
     content = PriorityContent.objects.filter(subtopic_number=subtopic_id)
-    cleaned_contents = []
+    course = get_object_or_404(Course, pk=course_id)
+    course_progress, created = CourseProgress.objects.update_or_create(
+        user=request.user,
+        course=course,  # Присваиваем экземпляр модели Course
+        defaults={'suptopic': subtopic}
+    )
+    if not created:
+        # If the object already exists, update its attributes
+        course_progress.course = course
+        course_progress.suptopic = subtopic
+        # Update any other attributes as needed
+        course_progress.save()
     
+    
+    cleaned_contents = []
     for material in content:
-        cleaned_content = bleach.clean(material.material_number.content, tags=['p', 'h3', 'strong','h1', 'h2', 'img'], attributes={'img': ['src']})
-        material.content = cleaned_content
-        cleaned_contents.append(material)
-
+        if material.material_number:
+            cleaned_content = bleach.clean(material.material_number.content, tags=['p', 'h3', 'strong','h1', 'h2', 'img'], attributes={'img': ['src']})
+            material.content = cleaned_content
+            cleaned_contents.append(material)
+        elif material.test_number:
+            cleaned_contents.append(material)
+    
     context = {
+        'course': course,
         'subtopic': subtopic,
-        'content': cleaned_contents
+        'content': cleaned_contents,
     }
     return render(request, 'courses/course_materials.html', context)

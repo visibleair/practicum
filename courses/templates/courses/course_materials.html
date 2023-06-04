@@ -21,11 +21,24 @@
       <li>Нет материалов для этого курса.</li>
       {% endfor %}{% endcomment %}
       <h1>{{ subtopic.title }}</h1>
-      <p>{% for object in content %}
+      {% for object in content %}
+        {% if object.material_number.content %}
           {{object.material_number.content|safe}}
-        {% endfor %}</p>
-    {%else%}
+        {% elif object.test_number.title %}
+          <h1>Тест</h1>
+         {{object.test_number.title}}
+        {% endif %}
+        {% empty %}
+        <li>Нет материалов для этого курса.</li>
+      {% endfor %}
+      <a href="{% url 'subtopic_detail' course_id=course.id subtopic_id=subtopic.id|add:1 %}">Далее</a>
+      
+      
+
+
     </section>
+    
   {% endif %}
     
 {% endblock content %}
+

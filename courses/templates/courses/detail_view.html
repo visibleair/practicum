@@ -25,12 +25,12 @@
       
     </section>
     {% if enrolled %}
-      <form method="post" action="{% url 'course_materials' course.id %}">
+      <form method="post" action="{% url 'test_course' course.id %}">
       {% csrf_token %}
       <button type="submit" class="course_btn">Продолжить обучение</button>
     </form>
     {% else %}
-      <form method="post" action="{% url 'enroll_course' course.id %}" action="{% url 'course_materials' course.id %}">
+      <form method="post" action="{% url 'enroll_course' course.id %}" action="{% url 'test_course' course.id %}">
       {% csrf_token %}
       <button type="submit" class="course_btn">Начать обучение</button>
     </form>

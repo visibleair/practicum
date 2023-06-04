@@ -7,5 +7,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('courses/', include('courses.urls')),
-    path('accounts/', include("django.contrib.auth.urls"))
+    path('accounts/', include("django.contrib.auth.urls")),
+    path('tests/', include("tests.urls"))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

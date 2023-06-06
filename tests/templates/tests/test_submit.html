@@ -1,0 +1,18 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block title %}Курсы{% endblock title %}
+{% block head %}
+  <link rel="stylesheet" href="{%static 'main/css/course_material.css'%}">
+{% endblock head %}
+{% block header %}
+    {% include 'main/navbar.html' %}
+{% endblock header %}
+
+{% block content %}
+  {% if request.user.is_authenticated %}
+    <section class="block_content">
+      <h1>Ваша попытка отправлена на проверку.</h1>
+    </section>
+  {% endif %}
+{% endblock content %}

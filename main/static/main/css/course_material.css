@@ -3,34 +3,14 @@
     margin: auto;
 }
 
-
-h1{
-    font-weight: bold;
-    font-size: 45px;
-    margin-top: 48px;
+.a, a:visited {
+    color: #FFF;
 }
-
-h2{
-    margin-top: 40px;
-    margin-bottom: 12px;
-    font-size: 24px;
-    font-weight: 700;
-}
-
-h3{
-    font-weight: bold;
-}
-
-p{
-    margin-top: 20px;
-    margin-bottom: 12px;
-    font-size: 20px;
-    font-weight: 450;
-}
-
-.block_content img{
-    margin-top: 20px;
+.course_btn {
+    background: linear-gradient(90deg, #FE6D33 0%, #6C212C 100%);
+    padding: 25px;
     border-radius: 25px;
-    width: 100%;
-    align-items: center;
-}
+    color: #FFF;
+    font-weight: 500;
+    max-width: 500px;
+  }

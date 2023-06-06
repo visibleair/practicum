@@ -13,6 +13,7 @@ def courses(request):
 
 
 def courseDetailView(request, course_id):
+    subtopics = Subtopics.objects.filter(course_id=course_id)
     course = get_object_or_404(Course, pk=course_id)
     user = request.user
     subtopic = get_object_or_404(CourseProgress, course_id=1, user_id=user.id).suptopic
@@ -21,6 +22,7 @@ def courseDetailView(request, course_id):
     context = {
         'course': course,
         'subtopic': subtopic,
+        'subtopics': subtopics
     }
     if CourseEnrollment.objects.filter(user=user, course=course).exists():
         context['enrolled'] = True
@@ -83,3 +85,6 @@ def subtopic_detail_view(request, course_id, subtopic_id):
         'content': cleaned_contents,
     }
     return render(request, 'courses/course_materials.html', context)
+
+
+    

@@ -1,39 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-  <form method="post" action="{% url 'submit_answers' test.id %}">
-    {% csrf_token %}
-    <h1>{{ test.title }}</h1>
-  
-    {% for question in questions %}
-      <h2>{{ question.question_text }}</h2>
-  
-      {% if question.answers.exists %}
-        <ul>
-          {% for answer in question.answers.all %}
-            <li>
-              <label>
-                <input type="checkbox" name="answers_{{ question.id }}" value="{{ answer.answer_text }}">
-                {{ answer.answer_text }}
-              </label>
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <input type="text" name="answer_{{ question.id }}" placeholder="Your answer" />
-      {% endif %}
-    {% endfor %}
-  
-    <button type="submit">Submit</button>
-  </form>
-  
+{% extends 'main/layout.html' %}
+{% load static %}
 
+{% block title %}Курсы{% endblock title %}
+{% block head %}
+  <link rel="stylesheet" href="{%static 'main/css/course_material.css'%}">
+{% endblock head %}
+{% block header %}
+    {% include 'main/navbar.html' %}
+{% endblock header %}
 
-</body>
-</html>
+{% block content %}
+  {% if request.user.is_authenticated %}
+    <section class="block_content">
+      <form method="post" action="{% url 'submit_answers' test.id %}">
+        {% csrf_token %}
+        <h1>{{ test.title }}</h1>
+        {% for question in questions %}
+          <h2>{{ question.question_text }}</h2>
+      
+          {% if question.answers.exists %}
+            <ul>
+              {% for answer in question.answers.all %}
+                <li>
+                  <label>
+                    <input type="checkbox" name="answers_{{ question.id }}" value="{{ answer.answer_text }}">
+                    {{ answer.answer_text }}
+                  </label>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <input type="text" name="answer_{{ question.id }}" placeholder="Ваш ответ" />
+          {% endif %}
+        {% endfor %}
+        <br><button type="submit" class="course_btn">Отправить</button>
+      </form>
+    </section>
+  {% endif %}
+{% endblock content %}

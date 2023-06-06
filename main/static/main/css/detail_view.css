@@ -39,11 +39,27 @@
     border-radius: 26px;
 }
 
-.course_btn{
-    background: linear-gradient(90deg, #FE6D33 0%, #6C212C 100%);
-    padding: 25px;
+.course_programm {
+    background-color: #f2f2f2;
+    padding: 20px;
     border-radius: 25px;
-    color: #FFF;
-    margin-top: 20px;
-    font-weight: 500;
+    margin-top:20px;
+}
+
+.course_programm h2 {
+margin-top:10px;
+}
+
+.course_list {
+list-style-type: none;
+margin: 0;
+padding: 0;
+}
+
+.course_list li {
+background-color: #ffffff;
+border-radius: 10px;
+padding: 15px;
+margin-bottom: 10px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

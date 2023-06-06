@@ -1,44 +1,30 @@
 {% extends 'main/layout.html' %}
 {% load static %}
+
+{% block title %}Курсы{% endblock title %}
 {% block head %}
+  <link rel="stylesheet" href="{%static 'main/css/course_material.css'%}">
 {% endblock head %}
-
-{% block title %}
-    Курсы
-{% endblock title %}
-
 {% block header %}
     {% include 'main/navbar.html' %}
-    <link rel="stylesheet" href="{%static 'main/css/course_material.css'%}">
 {% endblock header %}
 
 {% block content %}
   {% if request.user.is_authenticated %}
     <section class="block_content">
-    {% comment %}{% for material in materials %}
-      {{material.content|safe}}
-      {% empty %}
-      <li>Нет материалов для этого курса.</li>
-      {% endfor %}{% endcomment %}
       <h1>{{ subtopic.title }}</h1>
       {% for object in content %}
         {% if object.material_number.content %}
           {{object.material_number.content|safe}}
-        {% elif object.test_number.title %}
-          <h1>Тест</h1>
-         {{object.test_number.title}}
+          {% elif object.test_number.title %}
+          <h1>{{object.test_number.title}}</h1>
+          <button class="course_btn"><a href="{%url 'test_detail' object.test_number.id%}">Перейти к выполнению теста</a></button>
         {% endif %}
         {% empty %}
         <li>Нет материалов для этого курса.</li>
       {% endfor %}
-      <a href="{% url 'subtopic_detail' course_id=course.id subtopic_id=subtopic.id|add:1 %}">Далее</a>
-      
-      
-
-
+      <br><button class="course_btn"><a href="{% url 'subtopic_detail' course_id=course.id subtopic_id=subtopic.id|add:1 %}">Далее</a></button>
     </section>
-    
   {% endif %}
-    
 {% endblock content %}
 

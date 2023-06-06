@@ -228,3 +228,13 @@ p{
   max-width: 750px;
   border-right: 3px solid #000;
 }
+
+.course_btn {
+  background: linear-gradient(90deg, #FE6D33 0%, #6C212C 100%);
+  padding: 25px;
+  border-radius: 25px;
+  color: #FFF;
+  margin-top: 20px;
+  font-weight: 500;
+}
+

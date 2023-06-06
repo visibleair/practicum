@@ -35,6 +35,16 @@
       <button type="submit" class="course_btn">Начать обучение</button>
     </form>
     {% endif %}
+    <section class="course_programm">
+      <h2>Программа курса</h2>
+      <ul class="course_list">
+        {% for el in subtopics %}
+          <li>{{el.title}}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    <style>
+    </style>
 {% endblock content %}
 
       

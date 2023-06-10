@@ -8,5 +8,6 @@ urlpatterns = [
     path('', include('main.urls')),
     path('courses/', include('courses.urls')),
     path('accounts/', include("django.contrib.auth.urls")),
-    path('tests/', include("tests.urls"))
+    path('tests/', include("tests.urls")),
+    path('quiz/', include("quizes.urls"))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

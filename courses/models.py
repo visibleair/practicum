@@ -1,6 +1,10 @@
 from django.db import models
 from datetime import date
 from users.models import User
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+from tests.models import Test
+
 
 class Course(models.Model):
     name = models.CharField('Название курса', max_length=50)
@@ -46,16 +50,6 @@ class CourseMaterial(models.Model):
         verbose_name = 'Материал курса'
         verbose_name_plural = 'Материалы курса'
         
-        
-
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
-from django.db import models
-from tests.models import Test
-
-
-
-
 class Task(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
@@ -68,8 +62,7 @@ class Task(models.Model):
     class Meta:
         verbose_name = 'Задание'
         verbose_name_plural = 'Задания'
-        
-        
+          
 class CourseEnrollment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -77,8 +70,7 @@ class CourseEnrollment(models.Model):
 
     class Meta:
         unique_together = ('user', 'course')
-        
-        
+             
 class Subtopics(models.Model):
     title = models.CharField('Название подтемы', max_length=50)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)        
@@ -88,7 +80,6 @@ class Subtopics(models.Model):
     class Meta:
         verbose_name = 'Название подтемы'
         verbose_name_plural = 'Название подтемы'
-
 
 class PriorityContent(models.Model):
     number = models.AutoField('Номер по порядку', primary_key=True)
@@ -104,8 +95,7 @@ class PriorityContent(models.Model):
         verbose_name = 'Очередность контента'
         verbose_name_plural = 'Очередность контента'
         ordering = ['number']
-        
-        
+             
 class CourseProgress(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

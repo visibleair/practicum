@@ -2,11 +2,17 @@ from django.shortcuts import render
 from .models import Quiz
 from django.views.generic import ListView
 from django.http import JsonResponse
+from questions.models import Question, Answer
+from results.models import Result
+from django.shortcuts import HttpResponse
+
+def is_ajax(request):
+    return request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
 
 class QuizListView(ListView):
-    model = Quiz
+    model = Quiz 
     template_name = 'quizes/main.html'
-    
+
 def quiz_view(request, pk):
     quiz = Quiz.objects.get(pk=pk)
     return render(request, 'quizes/quiz.html', {'obj': quiz})
@@ -23,9 +29,9 @@ def quiz_data_view(request, pk):
         'data': questions,
         'time': quiz.time,
     })
-    
+
 def save_quiz_view(request, pk):
-    if request.is_ajax():
+    if is_ajax(request):
         questions = []
         data = request.POST
         data_ = dict(data.lists())

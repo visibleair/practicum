@@ -39,9 +39,6 @@ def courseDetailView(request, course_id):
             course=course, 
             suptopic=subtopics_list[0]
         )
-        
-    
-    
     
 def course_materials(request, course_id):
     course = get_object_or_404(Course, pk=course_id)

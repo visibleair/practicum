@@ -57,6 +57,8 @@ def subtopic_detail_view(request, course_id, subtopic_id):
     subtopic = get_object_or_404(Subtopics, pk=subtopic_id, course=course_id)
     content = PriorityContent.objects.filter(subtopic_number=subtopic_id)
     course = get_object_or_404(Course, pk=course_id)
+    subtopics = Subtopics.objects.filter(course=course_id).order_by('pk')
+    subtopics_list = list(subtopics)
     course_progress, created = CourseProgress.objects.update_or_create(
         user=request.user,
         course=course,  # Присваиваем экземпляр модели Course
@@ -79,10 +81,19 @@ def subtopic_detail_view(request, course_id, subtopic_id):
         elif material.test_number:
             cleaned_contents.append(material)
     
+   # Проверка, является ли текущий subtopic первым элементом массива
+    is_first_subtopic = subtopic_id == subtopics_list[0].pk
+
+    # Проверка, является ли текущий subtopic последним элементом массива
+    is_last_subtopic = subtopic_id == subtopics_list[-1].pk
+    
+    
     context = {
         'course': course,
         'subtopic': subtopic,
         'content': cleaned_contents,
+        'is_first_subtopic': is_first_subtopic,
+        'is_last_subtopic': is_last_subtopic
     }
     return render(request, 'courses/course_materials.html', context)
 

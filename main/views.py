@@ -1,4 +1,3 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
@@ -9,11 +8,9 @@ def index(request):
     news = News.objects.all()
     return render(request, 'main/index.html', {'news': news})
 
-
 @login_required
 def profile(request):
     return render(request, 'main/profile.html')
-
 
 def register(request):
     if request.method == 'POST':
@@ -26,8 +23,6 @@ def register(request):
     else:
         form = UserRegistrationForm()
     return render(request, 'registration/register.html', {'form': form})
-
-
 
 def user_login(request):
     if request.method == 'POST':
@@ -46,8 +41,6 @@ def user_login(request):
     else:
         form = UserLoginForm()
     return render(request, 'registration/login.html', {'form': form})
-
-
         
 def edit_profile(request):
     user = request.user
@@ -59,4 +52,3 @@ def edit_profile(request):
     else:
         form = UserProfileForm(instance=user)
     return render(request, 'main/edit.html', {'form': form})
-

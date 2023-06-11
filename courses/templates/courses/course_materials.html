@@ -23,7 +23,14 @@
         {% empty %}
         <li>Нет материалов для этого курса.</li>
       {% endfor %}
-      <br><button class="course_btn"><a href="{% url 'subtopic_detail' course_id=course.id subtopic_id=subtopic.id|add:1 %}">Далее</a></button>
+      <br>
+      {% if is_first_subtopic == False %}
+        <a class="course_btn" href="{% url 'subtopic_detail' course_id=course.id subtopic_id=subtopic.id|add:-1 %}">Назад</a>
+      {% endif %}
+      {% if is_last_subtopic == False %}
+        <a class="course_btn" href="{% url 'subtopic_detail' course_id=course.id subtopic_id=subtopic.id|add:1 %}">Далее</a>
+      {% endif %}
+  
     </section>
   {% endif %}
 {% endblock content %}

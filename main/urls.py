@@ -1,6 +1,5 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
-from .views import register, user_login
 
 urlpatterns = [
     path('', views.index, name='home'),

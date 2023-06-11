@@ -37,8 +37,6 @@ class Course(models.Model):
         context['teacher'] = User.objects.get(id=context['course'].teacher_id)
         return context
 
-
-
 class CourseMaterial(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     content = models.TextField()
@@ -99,3 +97,10 @@ class CourseProgress(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     suptopic = models.ForeignKey(Subtopics, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f'Course: {self.course.name}, Subtopic: {self.suptopic.title}'
+    
+    class Meta:
+        verbose_name = 'Прогресс по курсу'
+        verbose_name_plural = 'Прогресс по курсу'

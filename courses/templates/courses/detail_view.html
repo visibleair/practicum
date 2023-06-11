@@ -5,46 +5,41 @@
   <link rel="stylesheet" href="{%static 'main/css/detail_view.css'%}">
 {% endblock head %}
 
-{% block title %}
-    Курсы
-{% endblock title %}
+{% block title %}{{course.name}}{% endblock title %}
 
 {% block header %}
     {% include 'main/navbar.html' %}
 {% endblock header %}
 
 {% block content %}
-    <section class="card_course">
-      <section class="course_description">
-        <section class="section_md">
-          <section class="markdown">{{course.name}}</section>
-          <img class="course_image" src="{% static 'main/img/course_1.png' %}" alt="Course Image">
-        </section>
-        <section class="paragraph">{{course.description}}</section>
-      </section>
-      
+<section class="card_course">
+  <section class="course_description">
+    <section class="section_md">
+      <section class="markdown">{{course.name}}</section>
+      <img class="course_image" src="{% static 'main/img/course_1.png' %}" alt="Course Image">
     </section>
-    {% if enrolled %}
-    <form method="post" action="{% url 'subtopic_detail' course_id=course.id subtopic_id=subtopic.id %}">
-      {% csrf_token %}
-      <button type="submit" class="course_btn">Продолжить обучение</button>
-    </form>
-    {% else %}
-      <form method="post" action="{% url 'enroll_course' course.id %}" action="{% url 'test_course' course.id %}">
-      {% csrf_token %}
-      <button type="submit" class="course_btn">Начать обучение</button>
-    </form>
-    {% endif %}
-    <section class="course_programm">
-      <h2>Программа курса</h2>
-      <ul class="course_list">
-        {% for el in subtopics %}
-          <li>{{el.title}}</li>
-        {% endfor %}
-      </ul>
-    </section>
-    <style>
-    </style>
+    <section class="paragraph">{{course.description}}</section>
+  </section>
+</section>
+{% if enrolled %}
+  <form method="post" action="{% url 'subtopic_detail' course_id=course.id subtopic_id=subtopic.id %}">
+    {% csrf_token %}
+    <button type="submit" class="course_btn">Продолжить обучение</button>
+  </form>
+{% else %}
+  <form method="post" action="{% url 'enroll_course' course.id %}">
+    {% csrf_token %}
+    <button type="submit" class="course_btn">Начать обучение</button>
+  </form>
+{% endif %}
+<section class="course_programm">
+  <h2>Программа курса</h2>
+  <ul class="course_list">
+    {% for el in subtopics %}
+      <li>{{el.title}}</li>
+    {% endfor %}
+  </ul>
+</section>
 {% endblock content %}
 
       

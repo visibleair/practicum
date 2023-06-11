@@ -17,21 +17,30 @@ def courseDetailView(request, course_id):
     subtopics = Subtopics.objects.filter(course_id=course_id)
     course = get_object_or_404(Course, pk=course_id)
     user = request.user
-    subtopic = get_object_or_404(CourseProgress, course_id=1, user_id=user.id).suptopic
-   
-     
-    context = {
+    subtopics_list = list(subtopics)
+    try:
+        subtopic = CourseProgress.objects.get(course_id=1, user_id=user.id).suptopic
+        context = {
         'course': course,
         'subtopic': subtopic,
         'subtopics': subtopics
-    }
-    if CourseEnrollment.objects.filter(user=user, course=course).exists():
-        context['enrolled'] = True
-    else:
-        context['enrolled'] = False
+        }
+        if CourseEnrollment.objects.filter(user=user, course=course).exists():
+            context['enrolled'] = True
+        else:
+            context['enrolled'] = False
+        
+        
+        return render(request, 'courses/detail_view.html', context)
+    # Здесь выполняйте нужные вам действия с subtopic
+    except CourseProgress.DoesNotExist:
+        CourseProgress.objects.create(
+            user=request.user,
+            course=course, 
+            suptopic=subtopics_list[0]
+        )
+        
     
-    
-    return render(request, 'courses/detail_view.html', context)
     
     
 def course_materials(request, course_id):
@@ -51,7 +60,7 @@ def enroll_course(request, course_id):
     if request.method == 'POST':
         course = get_object_or_404(Course, pk=course_id)
         CourseEnrollment.objects.get_or_create(user=request.user, course=course)
-        return redirect('course_detail', pk=course_id)
+        return redirect('course_detail', course_id=course_id)
 
 
 def subtopic_detail_view(request, course_id, subtopic_id):
@@ -66,7 +75,7 @@ def subtopic_detail_view(request, course_id, subtopic_id):
         subtopics_list = list(subtopics)
         course_progress, created = CourseProgress.objects.update_or_create(
             user=request.user,
-            course=course,  # Присваиваем экземпляр модели Course
+            course=course, 
             defaults={'suptopic': subtopic}
         )
         if not created:

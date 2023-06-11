@@ -1,7 +1,7 @@
 {% extends 'main/layout.html' %}
 {% load static %}
 
-{% block title %}Курсы{% endblock title %}
+{% block title %}{{ subtopic.title }}{% endblock title %}
 {% block head %}
   <link rel="stylesheet" href="{%static 'main/css/course_material.css'%}">
 {% endblock head %}
@@ -30,7 +30,6 @@
       {% if is_last_subtopic == False %}
         <a class="course_btn" href="{% url 'subtopic_detail' course_id=course.id subtopic_id=subtopic.id|add:1 %}">Далее</a>
       {% endif %}
-  
     </section>
   {% endif %}
 {% endblock content %}

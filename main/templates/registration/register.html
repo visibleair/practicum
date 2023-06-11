@@ -12,7 +12,7 @@
 {% block content %}
 <section class="section_bg">
     <span class="auth__title">Регистрация</span>
-    <span class="register_link">Есть аккаунт? <a href="{% url 'profile' %}">Нажмите, чтобы войти</a></span>
+    <span class="register_link">Есть аккаунт? <a href="{% url 'login' %}">Нажмите, чтобы войти</a></span>
     {% if form.errors %}
     <div class="error-box">
         {% for field in form %}

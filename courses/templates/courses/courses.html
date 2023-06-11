@@ -1,10 +1,6 @@
 {% extends 'main/layout.html' %}
 {%load static %}
 
-{% block head %}
-
-{% endblock head %}
-
 {% block title %}
     Курсы
 {% endblock title %}
@@ -14,18 +10,14 @@
 {% endblock header %}
 
 {% block content %}
-
 <div class="tabs">
   <section class="tab_btn">
     <label for="tab1">Все курсы</label>
   
     <label for="tab2">Мои курсы</label>
-    
   </section>
-
   <input type="radio" id="tab1" name="tabs" checked>
   <input type="radio" id="tab2" name="tabs">
-
   <div class="tab-content">
     <div class="grid-container" id="panel1">
       {% for course in courses %}
@@ -68,7 +60,5 @@
     {% endfor %}
     </div>
   </div>
-</div>
-
-   
+</div>   
 {% endblock content %}

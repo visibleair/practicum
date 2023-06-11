@@ -226,7 +226,17 @@ p{
 
 .news_section{
   max-width: 750px;
-  border-right: 3px solid #000;
+  margin: auto;
+  text-align: center;
+}
+
+.news_section a{
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.news_section h1{
+  margin-bottom: 40px;
 }
 
 .course_btn {
@@ -238,3 +248,14 @@ p{
   font-weight: 500;
 }
 
+.news_el{
+  margin: 20px 0 20px 0;
+  text-align: left;
+  padding: 30px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 25px;
+}
+
+.news_el h2{
+  margin-top: 0;
+}

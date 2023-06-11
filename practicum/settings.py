@@ -23,7 +23,6 @@ AUTH_USER_MODEL = 'users.User'
 # Application definition
 
 INSTALLED_APPS = [
-    'tests',
     'users',
     'main',
     'courses',

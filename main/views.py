@@ -3,9 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from users.forms import UserRegistrationForm, UserLoginForm, UserProfileForm
+from .models import News
 
 def index(request):
-    return render(request, 'main/index.html')
+    news = News.objects.all()
+    return render(request, 'main/index.html', {'news': news})
 
 
 @login_required
@@ -57,3 +59,4 @@ def edit_profile(request):
     else:
         form = UserProfileForm(instance=user)
     return render(request, 'main/edit.html', {'form': form})
+

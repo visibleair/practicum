@@ -3,7 +3,7 @@ from datetime import date
 from users.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from tests.models import Test
+from quizes.models import Quiz
 
 
 class Course(models.Model):
@@ -86,7 +86,6 @@ class PriorityContent(models.Model):
     subtopic_number = models.ForeignKey(Subtopics, on_delete=models.CASCADE)
     material_number = models.ForeignKey(CourseMaterial, on_delete=models.CASCADE, null=True, blank=True)
     task_number = models.ForeignKey(Task, on_delete=models.CASCADE, null=True, blank=True)
-    test_number = models.ForeignKey(Test, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f'Number: {self.number}, Subtopic Number: {self.subtopic_number}'

@@ -35,18 +35,14 @@ def save_quiz_view(request, pk):
         questions = []
         data = request.POST
         data_ = dict(data.lists())
-
         data_.pop('csrfmiddlewaretoken')
-
         for k in data_.keys():
             print('key: ', k)
             question = Question.objects.get(text=k)
             questions.append(question)
         print(questions)
-
         user = request.user
         quiz = Quiz.objects.get(pk=pk)
-
         score = 0
         multiplier = 100 / quiz.number_of_questions
         results = []
@@ -54,7 +50,6 @@ def save_quiz_view(request, pk):
 
         for q in questions:
             a_selected = request.POST.get(q.text)
-
             if a_selected != "":
                 question_answers = Answer.objects.filter(question=q)
                 for a in question_answers:

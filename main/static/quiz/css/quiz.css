@@ -1,3 +1,12 @@
+.container {
+    width: 1270px;
+    margin: auto;
+    position: relative;
+}
+
+.row{
+    margin-top: 40px;
+}
 .btn {
     padding: 15px;
     background: linear-gradient(90deg, #FE6D33 0%, #6C212C 100%);
@@ -6,6 +15,24 @@
     min-width: 90px;
 }
 
+.btn-submit {
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+.btn-close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    min-width: 20px;
+    min-width: 20px;
+    height: 20px;
+    font-size: 15px;
+}
 .modal-btn{
     background: linear-gradient(90deg, #FE6D33 0%, #6C212C 100%);
     color: white;
@@ -56,3 +83,6 @@
     cursor: pointer;
 }
   
+.not-visible{
+    display:none
+}

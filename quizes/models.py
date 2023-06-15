@@ -21,6 +21,7 @@ class Quiz(models.Model):
         questions = list(self.question_set.all())
         random.shuffle(questions)
         return questions[:self.number_of_questions]
-
+        
     class Meta:
-        verbose_name_plural = 'Quizes'
+        verbose_name = 'Тест'
+        verbose_name_plural = 'Тесты'

@@ -8,4 +8,8 @@ class Result(models.Model):
     score = models.FloatField()
 
     def __str__(self):
-        return str(self.pk)
+        return str(str(self.user) + " " + str(self.quiz) + " " + str(self.score))
+
+    class Meta:
+        verbose_name = 'Результат'
+        verbose_name_plural = 'Результаты'

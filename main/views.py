@@ -19,7 +19,7 @@ def register(request):
             user = form.save()
             # автоматическая аутентификация пользователя после успешной регистрации
             login(request, user)
-            return redirect('home')
+            return redirect('main:home')
     else:
         form = UserRegistrationForm()
     return render(request, 'registration/register.html', {'form': form})
@@ -33,7 +33,7 @@ def user_login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                return redirect('main:home')
         # сохраняем данные в полях формы, если вход не был выполнен
         else:
             form.fields['username'].widget.attrs['value'] = request.POST.get('username')
@@ -48,7 +48,7 @@ def edit_profile(request):
         form = UserProfileForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('main:home')
     else:
         form = UserProfileForm(instance=user)
     return render(request, 'main/edit.html', {'form': form})

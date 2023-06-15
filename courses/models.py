@@ -77,7 +77,7 @@ class Subtopics(models.Model):
 
     class Meta:
         verbose_name = 'Название подтемы'
-        verbose_name_plural = 'Название подтемы'
+        verbose_name_plural = 'Названия подтемы'
 
 class PriorityContent(models.Model):
     number = models.AutoField('Номер по порядку', primary_key=True)

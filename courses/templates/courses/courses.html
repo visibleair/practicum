@@ -22,7 +22,7 @@
     <div class="grid-container" id="panel1">
       {% for course in courses %}
       <a href="{%url 'course_detail' course.id%}" class="course-card">
-        <img src="{{ course.picture }}" alt="Course Image">
+        <img src="{%static 'main/img/course_1.png'%}" alt="Course Image">
         <div class="course-details">
           <h2 class="course-title">{{ course.name }}</h2>
           <p class="course-description">{{ course.description | truncatechars_html:100 }}</p>
@@ -42,7 +42,7 @@
     <div class="grid-container" id="panel2">
     {% for course in enrolled_courses %}
     <a href="{%url 'course_detail' course.id%}" class="course-card">
-      <img src="{{ course.picture }}" alt="Course Image">
+      <img src="{%static 'main/img/course_1.png'%}" alt="Course Image">
       <div class="course-details">
         <h2 class="course-title">{{ course.name }}</h2>
         <p class="course-description">{{ course.description | truncatechars_html:100 }}</p>

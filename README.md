@@ -6,7 +6,7 @@ My diplome project
 - Установить библиотеку bleach "pip install bleach"
 - Внутри корневого каталога проекта прописать команду "python manage.py runserver"
 
-Данные от админки:
+Данные от админ панели:
   Логин: admin
   Пароль: Moneyl@st356
-
+Для перехода в админ-панель необходимо в адресной строке указать localhost:8000/admin

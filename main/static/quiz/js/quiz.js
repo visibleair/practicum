@@ -95,7 +95,6 @@ const sendData = () => {
             }
         }
     })
-
     $.ajax({
         type: 'POST',
         url: `${url}save/`,
@@ -107,6 +106,8 @@ const sendData = () => {
             timerBox.classList.add('not-visible')
 
             scoreBox.innerHTML = `${response.passed ? 'Поздравляем! ' : 'Не расстраивайтесь:( '}Ваш результат ${response.score.toFixed(2)}%`
+            scoreBox.classList.add('card_bg')
+            resultBox.classList.add('card_bg')
 
             results.forEach(res=>{
                 const resDiv = document.createElement("div")
@@ -117,7 +118,7 @@ const sendData = () => {
                     resDiv.classList.add(...cls)
 
                     if (resp=='not answered') {
-                        resDiv.innerHTML += '- not answered'
+                        resDiv.innerHTML += '- без ответа'
                         resDiv.classList.add('bg-danger')
                     }
                     else {
@@ -126,11 +127,11 @@ const sendData = () => {
 
                         if (answer == correct) {
                             resDiv.classList.add('bg-success')
-                            resDiv.innerHTML += ` answered: ${answer}`
+                            resDiv.innerHTML += ` ответ: ${answer}`
                         } else {
                             resDiv.classList.add('bg-danger')
-                            resDiv.innerHTML += ` | correct answer: ${correct}`
-                            resDiv.innerHTML += ` | answered: ${answer}`
+                            resDiv.innerHTML += ` | правильный ответ: ${correct}`
+                            resDiv.innerHTML += ` | Ваш ответ: ${answer}`
                         }
                     }
                 }
@@ -145,6 +146,5 @@ const sendData = () => {
 
 quizForm.addEventListener('submit', e=>{
     e.preventDefault()
-
     sendData()
 })

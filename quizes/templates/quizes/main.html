@@ -31,18 +31,47 @@
 <h1>Доступные тесты</h1>
 <hr>
 {% for obj in object_list %}
-    <button 
-        class="modal-btn"
-        data-pk="{{obj.pk}}"
-        data-quiz="{{obj.name}}"
-        data-questions="{{obj.number_of_questions}}"
-        data-difficulty="{{obj.difficulty}}"
-        data-time="{{obj.time}}"
-        data-pass="{{obj.required_score_to_pass}}"
-        data-bs-toggle="modal"
-        data-bs-target="#quizStartModal">
-        {{obj.name}}
-    </button><br>
+  {% if obj.difficulty == 'easy' %}
+  <button 
+    class="modal-btn easy"
+    data-pk="{{obj.pk}}"
+    data-quiz="{{obj.name}}"
+    data-questions="{{obj.number_of_questions}}"
+    data-difficulty="{{obj.difficulty}}"
+    data-time="{{obj.time}}"
+    data-pass="{{obj.required_score_to_pass}}"
+    data-bs-toggle="modal"
+    data-bs-target="#quizStartModal">
+    {{obj.name}}
+  </button><br>
+  {% elif obj.difficulty == 'medium'%}
+  <button 
+    class="modal-btn medium"
+    data-pk="{{obj.pk}}"
+    data-quiz="{{obj.name}}"
+    data-questions="{{obj.number_of_questions}}"
+    data-difficulty="{{obj.difficulty}}"
+    data-time="{{obj.time}}"
+    data-pass="{{obj.required_score_to_pass}}"
+    data-bs-toggle="modal"
+    data-bs-target="#quizStartModal">
+    {{obj.name}}
+  </button><br>
+  {% else %}
+  <button 
+    class="modal-btn"
+    data-pk="{{obj.pk}}"
+    data-quiz="{{obj.name}}"
+    data-questions="{{obj.number_of_questions}}"
+    data-difficulty="{{obj.difficulty}}"
+    data-time="{{obj.time}}"
+    data-pass="{{obj.required_score_to_pass}}"
+    data-bs-toggle="modal"
+    data-bs-target="#quizStartModal">
+    {{obj.name}}
+  </button><br>
+  {% endif %}
+    
 {% endfor %}
 {% endblock content %}
 

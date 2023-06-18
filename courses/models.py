@@ -12,6 +12,7 @@ class Course(models.Model):
     level = models.IntegerField('Сложность курса')
     date_create = models.DateField('Дата создания курса', default=date.today)
     date_lastchange = models.DateField('Дата последнего изменения курса', default=date.today)
+    picture = models.URLField('Картинка для курса', blank=True, max_length=800)
     teacher = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,

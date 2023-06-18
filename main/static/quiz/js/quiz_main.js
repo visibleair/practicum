@@ -17,7 +17,7 @@ modalBtns.forEach(modalBtn=> modalBtn.addEventListener('click', ()=>{
     const time = modalBtn.getAttribute('data-time')
     modalOverlay.style.display = 'flex';
     modalBody.innerHTML = `
-        <div class="h5 mb-3">Вы точнго хотите начать "<b>${name}</b>"?</div>
+        <div class="h5 mb-3">Вы точно хотите начать "<b>${name}</b>"?</div>
         <div class="text-muted">
             <ul>
                 <li>Сложность: <b>${difficulty}</b></li>
@@ -36,5 +36,3 @@ modalBtns.forEach(modalBtn=> modalBtn.addEventListener('click', ()=>{
         modalOverlay.style.display = 'none'
     })
 }))
-
-// Получаем элементы модального окна

@@ -79,6 +79,34 @@ class Migration(migrations.Migration):
             ],
             options={
                 'unique_together': {('user', 'course')},
+            }, 
+        ),
+        
+         migrations.CreateModel(
+            name='PriorityContent',
+            fields=[
+                ('number', models.AutoField(primary_key=True, serialize=False, verbose_name='Номер по порядку')),
+                ('material_number', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='courses.coursematerial')),
+                ('subtopic_number', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='courses.subtopics')),
+                ('task_number', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='courses.task')),
+            ],
+            options={
+                'verbose_name': 'Очередность контента',
+                'verbose_name_plural': 'Очередность контента',
+                'ordering': ['number'],
             },
         ),
+        migrations.CreateModel(
+            name='CourseProgress',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='courses.course')),
+                ('suptopic', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='courses.subtopics')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+                'verbose_name': 'Прогресс по курсу',
+                'verbose_name_plural': 'Прогресс по курсу',
+            },
+        )
     ]

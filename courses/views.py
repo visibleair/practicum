@@ -32,13 +32,13 @@ def courseDetailView(request, course_id):
         
         
         return render(request, 'courses/detail_view.html', context)
-    # Здесь выполняйте нужные вам действия с subtopic
     except CourseProgress.DoesNotExist:
         CourseProgress.objects.create(
             user=request.user,
             course=course, 
             suptopic=subtopics_list[0]
         )
+        return redirect('course_detail', course_id=course_id)
     
 def course_materials(request, course_id):
     course = get_object_or_404(Course, pk=course_id)

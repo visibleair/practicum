@@ -2,7 +2,7 @@ from django.db import models
 from quizes.models import Quiz
 
 class Question(models.Model):
-    text = models.CharField(max_length=200)
+    text = models.CharField(max_length=500)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -17,7 +17,7 @@ class Question(models.Model):
         verbose_name_plural = 'Вопросы'
 
 class Answer(models.Model):
-    text = models.CharField(max_length=200)
+    text = models.CharField(max_length=500)
     correct = models.BooleanField(default=False)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)

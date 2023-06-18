@@ -29,6 +29,7 @@ body{
     justify-content: center;
     align-items: center;
     min-width: 300px;
+    max-width: 350px;
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     border-radius: 25px;

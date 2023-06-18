@@ -5,3 +5,8 @@ My diplome project
 - Установить django "pip install django"
 - Установить библиотеку bleach "pip install bleach"
 - Внутри корневого каталога проекта прописать команду "python manage.py runserver"
+
+Данные от админки:
+  Логин: admin
+  Пароль: Moneyl@st356
+
